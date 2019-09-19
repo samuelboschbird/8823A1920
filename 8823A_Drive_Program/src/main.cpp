@@ -7,23 +7,47 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 #include "vex.h"
+#include "robot-config.h"
 
 using namespace vex;
-
-// A global instance of vex::brain used for printing to the V5 brain screen
-vex::brain        Brain;
-vex::controller   remote;
-
-
-// define your global instances of motors and other devices here
-
+          
 
 int main() {
-    int count = 0;
-   
-    while(1) {
-        Brain.Screen.printAt( 10, 50, "Hello V5 %d", count++ );
-        // Allow other tasks to run
-        this_thread::sleep_for(10);
+  float leftDriveValue;
+  float leftDriveValue2;
+    
+  float rightDriveValue;
+  float rightDriveValue2;
+    
+  while(true){
+
+    if(true){ //Drive | if statement for collapsability
+      leftDriveValue = remote.Axis3.position(percentUnits::pct);
+
+      if(abs(leftDriveValue) < 10){
+        leftDriveValue = 0;
+      }
+      leftDriveValue2 = pow(leftDriveValue/100, 3.0)*100;
+        
+      frontLeft.spin(directionType::fwd,leftDriveValue2,velocityUnits::pct);
+      backLeft.spin(directionType::fwd,leftDriveValue2,velocityUnits::pct);
+        
+        
+      rightDriveValue = remote.Axis2.position(percentUnits::pct);
+        
+      if(abs(rightDriveValue) < 10){
+        rightDriveValue = 0;
+      }
+      rightDriveValue2 = pow(rightDriveValue/100, 3.0)*100;
+        
+      frontRight.spin(directionType::fwd,rightDriveValue2,velocityUnits::pct);
+      backRight.spin(directionType::fwd,rightDriveValue2,velocityUnits::pct);
     }
+
+    if(true){ //Lift | if statement for collapsability
+      if(remote.ButtonL1.pressing()){leftArm.spin(directionType::fwd);rightArm.spin(directionType::fwd);}
+      if(remote.ButtonL2.pressing()){leftArm.spin(directionType::rev);rightArm.spin(directionType::rev);}
+    }
+
+  }
 }
