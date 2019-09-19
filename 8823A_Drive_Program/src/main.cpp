@@ -47,6 +47,13 @@ int main() {
     if(true){ //Lift | if statement for collapsability
       if(remote.ButtonL1.pressing()){leftArm.spin(directionType::fwd);rightArm.spin(directionType::fwd);}
       if(remote.ButtonL2.pressing()){leftArm.spin(directionType::rev);rightArm.spin(directionType::rev);}
+      else{leftArm.stop();rightArm.stop();}
+    }
+
+    if(true){ //Claw | if statement for collapsability
+      if(remote.ButtonR1.pressing()){claw.spin(directionType::fwd);}
+      if(remote.ButtonR2.pressing()){claw.spin(directionType::rev);}
+      else{claw.stop();}
     }
 
   }
