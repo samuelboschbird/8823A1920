@@ -22,7 +22,7 @@ int main() {
   while(true){
 
     if(true){ //Drive | if statement for collapsability
-      leftDriveValue = remote.Axis3.position(percentUnits::pct);
+      leftDriveValue = remote.Axis1.position(percentUnits::pct);
 
       if(abs(leftDriveValue) < 10){
         leftDriveValue = 0;
@@ -45,14 +45,14 @@ int main() {
     }
 
     if(true){ //Lift | if statement for collapsability
-      if(remote.ButtonL1.pressing()){leftArm.setVelocity(100, velocityUnits::pct);rightArm.setVelocity(100, velocityUnits::pct);}
-      if(remote.ButtonL2.pressing()){leftArm.spin(directionType::rev);rightArm.spin(directionType::rev);}
+      if(remote.ButtonL1.pressing()){leftArm.spin(directionType::fwd);rightArm.spin(directionType::fwd);}
+      else if(remote.ButtonL2.pressing()){leftArm.spin(directionType::rev);rightArm.spin(directionType::rev);}
       else{leftArm.stop(brakeType::hold);rightArm.stop(brakeType::hold);}
     }
 
     if(true){ //Claw | if statement for collapsability
       if(remote.ButtonR1.pressing()){claw.spin(directionType::fwd);}
-      if(remote.ButtonR2.pressing()){claw.spin(directionType::rev);}
+      else if(remote.ButtonR2.pressing()){claw.spin(directionType::rev);}
       else{claw.stop();}
     }
 
